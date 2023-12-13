@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="scroll.css">
+  <script src="" defer></script>
+</head>
+<body>
+  <div class="row">
+    <div class="header">
+      <h3 class="title">Title</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="container">
+      <button class="handle left-handle">
+        <div class="back__arrow">
+          <i class="arrow left"></i>
+        </div>
+      </button>
+      <div class="slider">
+        <img src="images/Graphics/Motion Graphics/C3.gif">
+        <img src="images/Graphics/Motion Graphics/rams_loop_blue.gif">
+        <img src="images/Graphics/Motion Graphics/Unify_on_black.gif">
+        <img src="images/Graphics/Motion Graphics/Airplane.gif">
+        <img src="images/Graphics/Motion Graphics/cartoon.gif">
+        <img src="images/Graphics/Motion Graphics/Dodge+Logo2.gif">
+        <img src="images/Graphics/Motion Graphics/Powerline+Pictures+NO+MUSIC.gif">
+        <img src="images/Graphics/Motion Graphics/Mike+Overton+Intro.gif">
+        <img src="images/Graphics/Motion Graphics/Sylus.gif">
+      </div>
+      <button class="handle right-handle">
+        <div class="back__arrow">
+          <i class="arrow right"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="header">
+      <h3 class="title">Title</h3>
+      <div class="progress-bar"></div>
+    </div>
+    <div class="container">
+      <button class="handle left-handle">
+        <div class="back__arrow">
+          <i class="arrow left"></i>
+        </div>
+      </button>
+      <div class="poster__slider">
+        <img src="images/Graphics/Posters/CKOM fixed.jpg"/>
+            <img src="images/Graphics/Posters/illustration+2.6.20+DOWNRES.jpg"/>
+            <img src="images/Graphics/Posters/Neil+Downres2.jpg"/>
+            <img src="images/Graphics/Posters/TIRO+downres.jpg"/>
+            <img src="images/Graphics/Posters/Official+Poster+Low+Res.jpg"/>
+            <img src="images/Graphics/Posters/highway 9 poster.jpg" />
+            <img src="images/Graphics/Posters/Savior_Fixed.jpg" />
+            <img src="images/Graphics/Posters/ERNIE.jpg"/>
+            <img src="images/Graphics/Posters/EYES+small.jpg"/>
+      </div>
+      <button class="handle right-handle">
+        <div class="back__arrow">
+          <i class="arrow right"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+
+
+
+<!-- this is the script for the scrolling feature  -->
+<script>
+  document.addEventListener("click", e => {
+  let handle
+  if (e.target.matches(".handle")) {
+    handle = e.target
+  } else {
+    handle = e.target.closest(".handle")
+  }
+  if (handle != null) onHandleClick(handle)
+})
+
+const throttleProgressBar = throttle(() => {
+  document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
+}, 250)
+window.addEventListener("resize", throttleProgressBar)
+
+document.querySelectorAll(".progress-bar").forEach(calculateProgressBar)
+
+function calculateProgressBar(progressBar) {
+  progressBar.innerHTML = ""
+  const slider = progressBar.closest(".row").querySelector(".slider, .poster__slider")
+  const itemCount = slider.children.length
+  const itemsPerScreen = parseInt(
+    getComputedStyle(slider).getPropertyValue("--items-per-screen")
+  )
+  let sliderIndex = parseInt(
+    getComputedStyle(slider).getPropertyValue("--slider-index")
+  )
+  const progressBarItemCount = Math.ceil(itemCount / itemsPerScreen)
+
+  if (sliderIndex >= progressBarItemCount) {
+    slider.style.setProperty("--slider-index", progressBarItemCount - 1)
+    sliderIndex = progressBarItemCount - 1
+  }
+
+  for (let i = 0; i < progressBarItemCount; i++) {
+    const barItem = document.createElement("div")
+    barItem.classList.add("progress-item")
+    if (i === sliderIndex) {
+      barItem.classList.add("active")
+    }
+    progressBar.append(barItem)
+  }
+}
+
+function onHandleClick(handle) {
+  const progressBar = handle.closest(".row").querySelector(".progress-bar")
+  const slider = handle.closest(".container").querySelector(".slider, .poster__slider")
+  const sliderIndex = parseInt(
+    getComputedStyle(slider).getPropertyValue("--slider-index")
+  )
+  const progressBarItemCount = progressBar.children.length
+  if (handle.classList.contains("left-handle")) {
+    if (sliderIndex - 1 < 0) {
+      slider.style.setProperty("--slider-index", progressBarItemCount - 1)
+      progressBar.children[sliderIndex].classList.remove("active")
+      progressBar.children[progressBarItemCount - 1].classList.add("active")
+    } else {
+      slider.style.setProperty("--slider-index", sliderIndex - 1)
+      progressBar.children[sliderIndex].classList.remove("active")
+      progressBar.children[sliderIndex - 1].classList.add("active")
+    }
+  }
+
+  if (handle.classList.contains("right-handle")) {
+    if (sliderIndex + 1 >= progressBarItemCount) {
+      slider.style.setProperty("--slider-index", 0)
+      progressBar.children[sliderIndex].classList.remove("active")
+      progressBar.children[0].classList.add("active")
+    } else {
+      slider.style.setProperty("--slider-index", sliderIndex + 1)
+      progressBar.children[sliderIndex].classList.remove("active")
+      progressBar.children[sliderIndex + 1].classList.add("active")
+    }
+  }
+}
+
+function throttle(cb, delay = 1000) {
+  let shouldWait = false
+  let waitingArgs
+  const timeoutFunc = () => {
+    if (waitingArgs == null) {
+      shouldWait = false
+    } else {
+      cb(...waitingArgs)
+      waitingArgs = null
+      setTimeout(timeoutFunc, delay)
+    }
+  }
+
+  return (...args) => {
+    if (shouldWait) {
+      waitingArgs = args
+      return
+    }
+
+    cb(...args)
+    shouldWait = true
+    setTimeout(timeoutFunc, delay)
+  }
+}
+
+</script>
+<!-- end of script for the scrolling feature  -->
+
+</body>
+
+
+
+</html>

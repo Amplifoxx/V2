@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mike Overton Films</title>
+    <link rel="stylesheet" href="graphics.css"/>
+
+</head>
+<body>
+<script>
+    $(function() {
+        confirm();
+        var $video1 = $(".video1");
+    
+        $video1.on("mouseenter focus", function () {
+            $video1.get(0).play();
+        });
+    });
+</script>
+
+
+    <div class="nav" id="nav">
+        <a href="index.html"><button class="nav__title">MIKE OVERTON</button></a>
+            <!-- <img src="images/netflix-avatar.png" alt="" class="nav__avatar"> -->
+            <a href=home.html><button class="nav__page">Films</button></a>
+            <a href=home.html><button class="nav__page">Graphics</button></a>
+            <a href=home.html><button class="nav__page">Animation</button></a>
+            <div class="nav__spacer"></div>
+                <a href="contact.html"><button class="nav__button">Contact</button></a>
+                <!-- <button class="nav__button">RESUMÉ</button> -->
+            </div>
+    </div>
+
+    <!-- Banner Backup -->
+
+    <!-- <div class="banner">
+
+        <div class="banner__contents">
+            <img src="images/Movie Title Cards/Chicken Little Title.png" alt="" class="banner__logo">
+            <div class="banner__buttons">
+                <button class="banner__button">Watch Now</button>
+            </div>
+            <div class="banner__description">
+                Spencer Sutherland and Meghan Trainor perform their latest single, "Chicken Little."
+            </div>
+        </div>
+        <div class="banner--fadeBottom"></div>
+    </div> -->
+        
+    <!-- end of banner backup -->
+    
+
+    <div class="row" style="margin-top:100px">
+        <div class="sections" style="margin-left:0px;margin-bottom: 10px;">2D Animation</div>
+        <div class="motion__graphics">
+            <img src="images/Graphics/Motion Graphics/Rams.gif" class="animation__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Dodge+Logo.gif" class="animation__graphic"/>
+        </div>
+    </div>
+    
+    <div class="row" style="margin-top:100px">
+        <div class="sections" style="margin-left:0px;margin-bottom: 10px;">Motion Graphics</div>
+        <div class="motion__graphics">
+            <img src="images/Graphics/Motion Graphics/rams_loop_blue.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/C3.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Unify.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Dodge+Logo2.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Powerline+Pictures+NO+MUSIC.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Mike+Overton+Intro.gif" class="row__graphic"/>
+            <img src="images/Graphics/Motion Graphics/Sylus.gif" class="row__graphic"/>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top:40px">
+        <div class="sections" style="margin-left:0px;margin-bottom: 10px;">Poster Designs</div>
+        <div class="poster__graphics">
+            <img src="images/Graphics/Posters/CKOM fixed.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/illustration+2.6.20+DOWNRES.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/Neil+Downres2.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/TIRO+downres.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/Official+Poster+Low+Res.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/highway 9 poster.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/Savior_Fixed.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/ERNIE.jpg" class="poster__graphic"/>
+            <img src="images/Graphics/Posters/EYES+small.jpg" class="poster__graphic"/>
+        </div>
+    </div>
+
+
+
+
+    <!-- script for video previews -->
+<script>
+    document.querySelectorAll('.oldvideoPreview,.clientvideoPreview, .videoPreview, .img__description_layer,').forEach(function(vid) {
+  vid.onmouseover = function() {
+    this.play();
+  }
+  vid.onmouseout = function() {
+    this.load(); // stop and show poster
+  }
+})
+</script>
+
+
+<!-- script for nav bar fading in and out on scroll -->
+<script>
+    const nav = document.getElementById('nav');
+
+    window.addEventListener('scroll', () => {
+        if(window.scrollY >=100) {
+            nav.classList.add('nav__black')
+        } else {
+            nav.classList.remove('nav__black')
+        }
+    })
+</script>
+
+</body>
+
+</html>
